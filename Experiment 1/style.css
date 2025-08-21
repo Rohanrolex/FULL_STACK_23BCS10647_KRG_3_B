@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 350px;
+    max-width: 90%;
+    text-align: center;
+}
+
+h1 {
+    color: #1b6ec1;
+}
+
+.balance-container {
+    margin: 20px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #27ae60;
+}
+
+.transaction-container input {
+    width: 80%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border: 1px solid #f0e0e0;
+    border-radius: 8px;
+}
+
+.buttons button {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#depositBtn {
+    background-color: #27ae60;
+    color: white;
+}
+
+#depositBtn:hover {
+    background-color: #2ecc71;
+}
+
+#withdrawBtn {
+    background-color: #c0392b;
+    color: white;
+}
+
+#withdrawBtn:hover {
+    background-color: #e74c3c;
+}
+
+.message {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #e47412;
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 15px 20px;
+    }
+
+    .transaction-container input {
+        width: 100%;
+    }
+
+    .buttons button {
+        width: 45%;
+        margin: 3px 2px;
+    }
+}
