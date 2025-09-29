@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f9f9f9;
+  margin: 40px;
+  color: #333;
+}
+
+#counter {
+  font-size: 3rem;
+  margin: 20px 0;
+  color: #2c3e50;
+}
+
+.btn-group {
+  margin: 15px 0;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#incrementBtn {
+  background: #27ae60;
+  color: white;
+}
+
+#decrementBtn {
+  background: #c0392b;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+#message {
+  font-weight: bold;
+  margin-top: 15px;
+  color: red;
+}
