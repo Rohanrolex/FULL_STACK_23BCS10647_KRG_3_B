@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus System - Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin_dashboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-bus"></i>
+                    Bus System
+                </a>
+                <div class="user-info">
+                    <span class="user-name" id="user-name">Admin</span>
+                    <button class="btn btn-primary" id="logout-btn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <div class="container">
+            <!-- Statistics Cards -->
+            <div class="stat-cards">
+                <div class="stat-card buses">
+                    <h3>Total Buses</h3>
+                    <div class="number" id="total-buses">0</div>
+                    <i class="fas fa-bus icon"></i>
+                </div>
+                <div class="stat-card routes">
+                    <h3>Total Routes</h3>
+                    <div class="number" id="total-routes">0</div>
+                    <i class="fas fa-route icon"></i>
+                </div>
+                <div class="stat-card bookings">
+                    <h3>Total Bookings</h3>
+                    <div class="number" id="total-bookings">0</div>
+                    <i class="fas fa-ticket-alt icon"></i>
+                </div>
+                <div class="stat-card users">
+                    <h3>Total Users</h3>
+                    <div class="number" id="total-users">0</div>
+                    <i class="fas fa-users icon"></i>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab-header">
+                    <button class="tab-btn active" data-tab="buses">
+                        <i class="fas fa-bus"></i> Buses
+                    </button>
+                    <button class="tab-btn" data-tab="routes">
+                        <i class="fas fa-route"></i> Routes
+                    </button>
+                    <button class="tab-btn" data-tab="bookings">
+                        <i class="fas fa-ticket-alt"></i> Bookings
+                    </button>
+                    <button class="tab-btn" data-tab="users">
+                        <i class="fas fa-users"></i> Users
+                    </button>
+                </div>
+
+                <!-- Buses Tab -->
+                <div class="tab-content active" id="buses-tab">
+                    <div class="action-panel">
+                        <h2 class="panel-title">Manage Buses</h2>
+                        <button class="btn btn-primary" id="add-bus-btn">
+                            <i class="fas fa-plus"></i> Add Bus
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table id="buses-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Bus Number</th>
+                                    <th>Type</th>
+                                    <th>Capacity</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Bus data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Routes Tab -->
+                <div class="tab-content" id="routes-tab">
+                    <div class="action-panel">
+                        <h2 class="panel-title">Manage Routes</h2>
+                        <button class="btn btn-primary" id="add-route-btn">
+                            <i class="fas fa-plus"></i> Add Route
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table id="routes-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Distance</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Route data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Bookings Tab -->
+                <div class="tab-content" id="bookings-tab">
+                    <div class="action-panel">
+                        <h2 class="panel-title">Manage Bookings</h2>
+                    </div>
+                    <div class="table-container">
+                        <table id="bookings-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User</th>
+                                    <th>Route</th>
+                                    <th>Date</th>
+                                    <th>Bus</th>
+                                    <th>Seats</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Booking data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Users Tab -->
+                <div class="tab-content" id="users-tab">
+                    <div class="action-panel">
+                        <h2 class="panel-title">Manage Users</h2>
+                    </div>
+                    <div class="table-container">
+                        <table id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Joined</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- User data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    &copy; 2023 Bus System. All rights reserved.
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bus Modal -->
+    <div class="modal-container" id="bus-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="bus-modal-title">Add New Bus</h3>
+                <button class="modal-close" id="close-bus-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="bus-form">
+                    <input type="hidden" id="bus-id">
+                    <div class="form-group">
+                        <label for="bus-number">Bus Number</label>
+                        <input type="text" id="bus-number" class="form-control" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="bus-type">Bus Type</label>
+                                <select id="bus-type" class="form-control" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Standard">Standard</option>
+                                    <option value="Premium">Premium</option>
+                                    <option value="Luxury">Luxury</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="bus-capacity">Capacity</label>
+                                <input type="number" id="bus-capacity" class="form-control" min="1" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bus-status">Status</label>
+                        <select id="bus-status" class="form-control" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="Maintenance">Maintenance</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save-bus-btn">Save</button>
+                <button type="button" class="btn btn-danger" id="cancel-bus-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Route Modal -->
+    <div class="modal-container" id="route-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="route-modal-title">Add New Route</h3>
+                <button class="modal-close" id="close-route-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="route-form">
+                    <input type="hidden" id="route-id">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="route-from">From</label>
+                                <input type="text" id="route-from" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="route-to">To</label>
+                                <input type="text" id="route-to" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="route-distance">Distance (km)</label>
+                                <input type="number" id="route-distance" class="form-control" min="1" step="0.1" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="route-duration">Duration (hours)</label>
+                                <input type="number" id="route-duration" class="form-control" min="0.5" step="0.5" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="route-price">Price ($)</label>
+                        <input type="number" id="route-price" class="form-control" min="1" step="0.01" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save-route-btn">Save</button>
+                <button type="button" class="btn btn-danger" id="cancel-route-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Status Modal -->
+    <div class="modal-container" id="booking-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Update Booking Status</h3>
+                <button class="modal-close" id="close-booking-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="booking-form">
+                    <input type="hidden" id="booking-id">
+                    <div class="form-group">
+                        <label for="booking-status">Booking Status</label>
+                        <select id="booking-status" class="form-control" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save-booking-btn">Save</button>
+                <button type="button" class="btn btn-danger" id="cancel-booking-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Role Modal -->
+    <div class="modal-container" id="user-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Update User Role</h3>
+                <button class="modal-close" id="close-user-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="user-form">
+                    <input type="hidden" id="user-id">
+                    <div class="form-group">
+                        <label for="user-role">User Role</label>
+                        <select id="user-role" class="form-control" required>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save-user-btn">Save</button>
+                <button type="button" class="btn btn-danger" id="cancel-user-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Image -->
+    <div class="background-overlay"></div>
+
+    <script src="js/admin_dashboard.js"></script>
+</body>
+</html> 

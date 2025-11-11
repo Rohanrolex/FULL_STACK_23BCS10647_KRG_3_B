@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus System - Book Your Journey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Enhanced styling for the homepage */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+        
+        .hero {
+            min-height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.8), rgba(10, 10, 10, 0.9)), url('images/bus-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin-bottom: 0;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.2), rgba(40, 40, 40, 0.1));
+            z-index: 0;
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #e74c3c, #ff7675);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+            line-height: 1.7;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern.png');
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #e74c3c, #ff7675);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: #aaaaaa;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .service-card {
+            background: rgba(25, 25, 25, 0.8);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(45deg, #e74c3c, #ff7675);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .service-card i {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #e74c3c, #ff7675);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.8;
+        }
+        
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+        
+        .service-card p {
+            color: #bbbbbb;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #121212, #1d1d1d);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .features::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0) 70%);
+            pointer-events: none;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            background: rgba(25, 25, 25, 0.5);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: rgba(30, 30, 30, 0.7);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #e74c3c;
+            margin-right: 1.5rem;
+            background: rgba(231, 76, 60, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        
+        .feature-content p {
+            color: #bbbbbb;
+            line-height: 1.6;
+        }
+        
+        /* CTA/Search Section */
+        .cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #0a0a0a, #151515);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .search-form {
+            background: rgba(25, 25, 25, 0.9);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .search-form::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #e74c3c, transparent, #e74c3c, transparent);
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.3;
+            border-radius: 25px;
+            animation: glowing 15s linear infinite;
+        }
+        
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        .search-form h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1.5rem;
+        }
+        
+        .form-control {
+            background: rgba(45, 45, 45, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            background: rgba(55, 55, 55, 0.8);
+            border-color: #e74c3c;
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .form-group label {
+            color: #cccccc;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .form-actions {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+        
+        /* Footer Enhancements */
+        footer {
+            background: #0a0a0a;
+            color: #aaaaaa;
+            padding-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #e74c3c, #ff7675, #e74c3c);
+            background-size: 200% 100%;
+            animation: gradient 5s linear infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .footer-section h3 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #e74c3c;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: #ffffff;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links a:hover {
+            background: #e74c3c;
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            background: rgba(10, 10, 10, 0.5);
+            padding: 1.5rem 0;
+            margin-top: 4rem;
+            text-align: center;
+            color: #888888;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="home-page">
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-bus"></i>
+                    Bus<span>System</span>
+                </a>
+                <div class="menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="search.html">Search</a></li>
+                        <li><a href="#">Routes</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="login.html" class="nav-btn">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Your Journey, Our Priority</h1>
+                <p>Experience premium bus travel with comfort, safety, and reliability. Book your tickets in seconds and enjoy your trip without worries.</p>
+                <a href="search.html" class="btn btn-primary">Start Your Journey <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>World-Class Services</h2>
+                <p>We offer premium services that set us apart from the competition, ensuring your journey is comfortable and memorable</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-ticket-alt"></i>
+                    <h3>Easy Booking</h3>
+                    <p>Book your tickets online with just a few clicks. Receive instant confirmation and digital tickets straight to your email.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Route Planner</h3>
+                    <p>Explore routes, schedules and find the best option for your journey with our intelligent route planning system.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Our customer support team is available around the clock to assist you with any queries or concerns during your journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Premium Experience</h2>
+                <p>We prioritize your comfort, safety, and convenience at every step of your journey</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Safety First</h3>
+                        <p>All our buses undergo rigorous safety checks regularly and are operated by experienced drivers.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Luxury Seating</h3>
+                        <p>Enjoy a comfortable journey with our ergonomic, spacious seats designed for maximum relaxation.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Free Wi-Fi</h3>
+                        <p>Stay connected with our complimentary high-speed Wi-Fi available throughout your journey.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Punctual Service</h3>
+                        <p>We value your time and ensure our buses depart and arrive according to schedule.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Secure Payments</h3>
+                        <p>Your payment details are protected with our secure, encrypted payment gateway.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Mobile Tickets</h3>
+                        <p>Get your tickets delivered digitally to your mobile device for hassle-free boarding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <div class="search-form">
+                <h2>Find Your Perfect Journey</h2>
+                <form id="quick-search-form">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="from-city"><i class="fas fa-map-marker-alt"></i> From</label>
+                                <input type="text" id="from-city" class="form-control" placeholder="Departure City" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="to-city"><i class="fas fa-map-marker-alt"></i> To</label>
+                                <input type="text" id="to-city" class="form-control" placeholder="Arrival City" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="departure-date"><i class="fas fa-calendar-alt"></i> Departure Date</label>
+                                <input type="date" id="departure-date" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="passengers"><i class="fas fa-users"></i> Passengers</label>
+                                <select id="passengers" class="form-control" required>
+                                    <option value="1">1 Passenger</option>
+                                    <option value="2">2 Passengers</option>
+                                    <option value="3">3 Passengers</option>
+                                    <option value="4">4 Passengers</option>
+                                    <option value="5">5 Passengers</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Find Buses</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Bus System</h3>
+                    <p>Your trusted bus booking platform for safe and comfortable journeys. Book your tickets online with ease and travel with confidence.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="search.html">Search</a></li>
+                        <li><a href="#">Routes</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Bus Terminal, Transport City</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 8901</p>
+                    <p><i class="fas fa-envelope"></i> info@bussystem.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Bus System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Background Overlay -->
+    <div class="background-overlay"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Buses - Bus System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #f1f1f1;
+            background-image: url('images/bus-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.95));
+            z-index: -1;
+        }
+
+        .header {
+            background-color: rgba(25, 25, 25, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: #fff;
+        }
+
+        .logo span {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+
+        .nav-btn {
+            background: rgba(231, 76, 60, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        /* Search container styles */
+        .search-form {
+            background: rgba(25, 25, 25, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            margin: 50px auto;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+            z-index: 1;
+        }
+
+        .search-form::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, rgba(231, 76, 60, 0.3), transparent, rgba(231, 76, 60, 0.3), transparent);
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.7;
+            border-radius: 25px;
+            animation: glowing 20s linear infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        .search-form h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .search-form h2 i {
+            color: #e74c3c;
+            margin-right: 8px;
+        }
+
+        .search-form h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: #ddd;
+            font-size: 1.1rem;
+        }
+
+        .form-group label i {
+            color: #e74c3c;
+            margin-right: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            background: rgba(40, 40, 40, 0.8);
+            border-color: #e74c3c;
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.3);
+            outline: none;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(231, 76, 60, 0.5);
+        }
+
+        /* Search Results Styles */
+        .search-results {
+            margin: 50px auto;
+            max-width: 900px;
+        }
+
+        .search-results h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .search-results h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #e74c3c;
+            border-radius: 2px;
+        }
+
+        .bus-card {
+            background: rgba(25, 25, 25, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bus-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(231, 76, 60, 0.3);
+        }
+
+        .bus-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 4px;
+            background: #e74c3c;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .bus-card:hover::after {
+            opacity: 1;
+        }
+
+        .bus-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bus-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .bus-type {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .bus-card-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .route-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .route-cities {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .city {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #eee;
+        }
+
+        .route-arrow {
+            color: #e74c3c;
+        }
+
+        .route-time {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: #bbb;
+        }
+
+        .route-time i {
+            color: #e74c3c;
+            margin-right: 8px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .bus-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .bus-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+
+        .bus-duration {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        .bus-features {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .bus-feature {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #ddd;
+        }
+
+        .bus-feature i {
+            color: #e74c3c;
+        }
+
+        .bus-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .seats-left {
+            color: #bbb;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .seats-left i {
+            color: #e74c3c;
+        }
+
+        .footer {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #e74c3c, #ff7675, #e74c3c);
+            background-size: 200% 100%;
+            animation: gradient 5s linear infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(231, 76, 60, 0.4);
+            animation: float 8s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-500px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .bus-card-body {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .bus-details {
+                align-items: flex-start;
+            }
+
+            .bus-card-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .bus-card-footer .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-bus"></i>
+                    Bus<span>System</span>
+                </a>
+                <div class="menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="search.html" class="nav-btn active">Search</a></li>
+                        <li><a href="#">Routes</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="login.html" class="nav-btn">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="search-form">
+            <h2><i class="fas fa-search"></i> Find Your Journey</h2>
+            <form id="search-form">
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="from"><i class="fas fa-map-marker-alt"></i> From</label>
+                            <input type="text" id="from" class="form-control" placeholder="Departure City" required autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="to"><i class="fas fa-map-marker-alt"></i> To</label>
+                            <input type="text" id="to" class="form-control" placeholder="Arrival City" required autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="date"><i class="fas fa-calendar-alt"></i> Departure Date</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="passengers"><i class="fas fa-users"></i> Passengers</label>
+                            <select id="passengers" class="form-control" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search Buses</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="search-results" class="search-results">
+            <h2>Available Buses</h2>
+            <div id="bus-list">
+                <!-- Bus search results -->
+                <div class="bus-card">
+                    <div class="bus-card-header">
+                        <span class="bus-name">Premium Express</span>
+                        <span class="bus-type">Luxury</span>
+                    </div>
+                    <div class="bus-card-body">
+                        <div class="route-info">
+                            <div class="route-cities">
+                                <span class="city">New York</span>
+                                <span class="route-arrow"><i class="fas fa-long-arrow-alt-right"></i></span>
+                                <span class="city">Boston</span>
+                            </div>
+                            <div class="route-time">
+                                <div><i class="far fa-clock"></i> Departure: 08:00 AM</div>
+                                <div><i class="far fa-clock"></i> Arrival: 12:30 PM</div>
+                                <div><i class="far fa-calendar-alt"></i> Date: Apr 10, 2023</div>
+                            </div>
+                        </div>
+                        <div class="bus-details">
+                            <div class="bus-price">$45.99</div>
+                            <div class="bus-duration"><i class="fas fa-hourglass-half"></i> 4.5 hours</div>
+                            <div class="bus-features">
+                                <span class="bus-feature"><i class="fas fa-wifi"></i> WiFi</span>
+                                <span class="bus-feature"><i class="fas fa-plug"></i> Charging</span>
+                                <span class="bus-feature"><i class="fas fa-snowflake"></i> AC</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bus-card-footer">
+                        <span class="seats-left"><i class="fas fa-chair"></i> 23 seats left</span>
+                        <a href="booking.html" class="btn btn-primary">Book Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="bus-card">
+                    <div class="bus-card-header">
+                        <span class="bus-name">Standard Express</span>
+                        <span class="bus-type">Standard</span>
+                    </div>
+                    <div class="bus-card-body">
+                        <div class="route-info">
+                            <div class="route-cities">
+                                <span class="city">New York</span>
+                                <span class="route-arrow"><i class="fas fa-long-arrow-alt-right"></i></span>
+                                <span class="city">Boston</span>
+                            </div>
+                            <div class="route-time">
+                                <div><i class="far fa-clock"></i> Departure: 10:30 AM</div>
+                                <div><i class="far fa-clock"></i> Arrival: 3:30 PM</div>
+                                <div><i class="far fa-calendar-alt"></i> Date: Apr 10, 2023</div>
+                            </div>
+                        </div>
+                        <div class="bus-details">
+                            <div class="bus-price">$35.50</div>
+                            <div class="bus-duration"><i class="fas fa-hourglass-half"></i> 5 hours</div>
+                            <div class="bus-features">
+                                <span class="bus-feature"><i class="fas fa-snowflake"></i> AC</span>
+                                <span class="bus-feature"><i class="fas fa-coffee"></i> Refreshments</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bus-card-footer">
+                        <span class="seats-left"><i class="fas fa-chair"></i> 15 seats left</span>
+                        <a href="booking.html" class="btn btn-primary">Book Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating particles for visual effect -->
+    <div class="particles">
+        <div class="particle" style="left: 20%; top: 80%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 60%; top: 90%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 35%; top: 70%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 75%; top: 85%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 15%; top: 95%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 50%; top: 75%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 80%; top: 95%; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 30%; top: 80%; animation-delay: 7s;"></div>
+        <div class="particle" style="left: 90%; top: 90%; animation-delay: 8s;"></div>
+        <div class="particle" style="left: 45%; top: 95%; animation-delay: 9s;"></div>
+        <div class="particle" style="left: 70%; top: 75%; animation-delay: 10s;"></div>
+        <div class="particle" style="left: 10%; top: 85%; animation-delay: 11s;"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Bus System</h3>
+                    <p>Your trusted bus booking platform for safe and comfortable journeys. Book your tickets online with ease.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="search.html">Search</a></li>
+                        <li><a href="#">Routes</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Bus Terminal, Transport City</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 8901</p>
+                    <p><i class="fas fa-envelope"></i> info@bussystem.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Bus System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Create more dynamic particles
+        document.addEventListener('DOMContentLoaded', function() {
+            const particles = document.querySelector('.particles');
+            
+            // Create additional particles dynamically
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + 70 + '%';
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                particle.style.animationDelay = Math.random() * 12 + 's';
+                particle.style.animationDuration = Math.random() * 12 + 8 + 's';
+                particles.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+</html> 
