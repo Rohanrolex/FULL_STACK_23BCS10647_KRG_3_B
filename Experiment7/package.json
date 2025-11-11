@@ -1,0 +1,17 @@
+{
+  "name": "jwt-banking-api",
+  "version": "1.0.0",
+  "description": "Banking API secured with JWT Authentication",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "rbac-system",
+  "version": "1.0.0",
+  "description": "Role-Based Access Control using Express, JWT, and Middleware",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
